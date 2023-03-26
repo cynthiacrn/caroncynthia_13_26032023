@@ -1,11 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import './index.css';
-
 import ProtectedRoute from "./components/ProtectedRoute";
-import { Home, SignIn, User } from './pages'
 import StoreProvider from "./store";
+import Home from './pages/Home'
+import SignIn from './pages/SignIn'
+import User from './pages/User'
+import './index.css';
 
 function App() {
   return (

@@ -1,5 +1,5 @@
-import ArgentBankLogo from '../assets/images/argentBankLogo.png'
 import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 
 function User() {
   return (
@@ -11,7 +11,9 @@ function User() {
           <h1>Welcome back<br/>Tony Jarvis!</h1>
           <button className="edit-button">Edit Name</button>
         </div>
+
         <h2 className="sr-only">Accounts</h2>
+
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Checking (x8349)</h3>
@@ -22,6 +24,7 @@ function User() {
             <button className="transaction-button">View transactions</button>
           </div>
         </section>
+
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Savings (x6712)</h3>
@@ -32,6 +35,7 @@ function User() {
             <button className="transaction-button">View transactions</button>
           </div>
         </section>
+
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
@@ -44,9 +48,7 @@ function User() {
         </section>
       </main>
 
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <Footer />
     </>
   )
 }

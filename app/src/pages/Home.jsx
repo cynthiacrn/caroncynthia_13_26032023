@@ -1,9 +1,9 @@
-import ArgentBankLogo from '../assets/images/argentBankLogo.png'
 import BankTreeLogo from '../assets/images/bank-tree.jpeg'
 import ChatIcon from '../assets/images/icon-chat.png'
 import MoneyIcon from '../assets/images/icon-money.png'
 import SecurityIcon from '../assets/images/icon-security.png'
 import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 
 function Home() {
   return (
@@ -20,6 +20,7 @@ function Home() {
             <p className="text">Open a savings account with Argent Bank today!</p>
           </section>
         </div>
+
         <section className="features">
           <h2 className="sr-only">Features</h2>
           <div className="feature-item">
@@ -55,9 +56,8 @@ function Home() {
           </div>
         </section>
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+
+      <Footer />
     </>
   );
 }

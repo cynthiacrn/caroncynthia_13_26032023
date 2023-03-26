@@ -1,5 +1,5 @@
-import ArgentBankLogo from '../assets/images/argentBankLogo.png'
 import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 
 function SignIn() {
   return (
@@ -29,9 +29,7 @@ function SignIn() {
         </section>
       </main>
 
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
+      <Footer />
     </>
   )
 }
