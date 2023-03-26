@@ -1,6 +1,6 @@
 import ArgentBankLogo from '../assets/images/argentBankLogo.png'
 
-function Login() {
+function SignIn() {
   return (
     <>
       <nav className="main-nav">
@@ -50,4 +50,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default SignIn;
