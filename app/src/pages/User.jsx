@@ -1,28 +1,10 @@
 import ArgentBankLogo from '../assets/images/argentBankLogo.png'
+import Navigation from "../components/Navigation";
 
 function User() {
   return (
     <>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="/index">
-          <img
-            className="main-nav-logo-image"
-            src={ArgentBankLogo}
-            alt="Argent Bank Logo"
-          />
-          <h1 className="sr-only">Argent Bank</h1>
-        </a>
-        <div>
-          <a className="main-nav-item" href="/user">
-            <i className="fa fa-user-circle"></i>
-            Tony
-          </a>
-          <a className="main-nav-item" href="/">
-            <i className="fa fa-sign-out"></i>
-            Sign Out
-          </a>
-        </div>
-      </nav>
+      <Navigation />
 
       <main className="main bg-dark">
         <div className="header">

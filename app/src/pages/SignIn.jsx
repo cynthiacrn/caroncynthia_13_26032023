@@ -1,24 +1,10 @@
 import ArgentBankLogo from '../assets/images/argentBankLogo.png'
+import Navigation from "../components/Navigation";
 
 function SignIn() {
   return (
     <>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="/">
-          <img
-            className="main-nav-logo-image"
-            src={ArgentBankLogo}
-            alt="Argent Bank Logo"
-          />
-          <h1 className="sr-only">Argent Bank</h1>
-        </a>
-        <div>
-          <a className="main-nav-item" href="/sign-in">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-          </a>
-        </div>
-      </nav>
+      <Navigation />
 
       <main className="main bg-dark">
         <section className="sign-in-content">

@@ -3,26 +3,13 @@ import BankTreeLogo from '../assets/images/bank-tree.jpeg'
 import ChatIcon from '../assets/images/icon-chat.png'
 import MoneyIcon from '../assets/images/icon-money.png'
 import SecurityIcon from '../assets/images/icon-security.png'
+import Navigation from "../components/Navigation";
 
 function Home() {
   return (
     <>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="/">
-          <img
-            className="main-nav-logo-image"
-            src={ArgentBankLogo}
-            alt="Argent Bank Logo"
-          />
-          <h1 className="sr-only">Argent Bank</h1>
-        </a>
-        <div>
-          <a className="main-nav-item" href="/sign-in">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-          </a>
-        </div>
-      </nav>
+      <Navigation />
+
       <main>
         <div className="hero" style={{ backgroundImage: `url(${BankTreeLogo})` }}>
           <section className="hero-content">
