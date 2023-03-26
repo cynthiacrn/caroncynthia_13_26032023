@@ -1,10 +1,10 @@
-import ArgentBankLogo from './assets/images/argentBankLogo.png'
-import BankTreeLogo from './assets/images/bank-tree.jpeg'
-import ChatIcon from './assets/images/icon-chat.png'
-import MoneyIcon from './assets/images/icon-money.png'
-import SecurityIcon from './assets/images/icon-security.png'
+import ArgentBankLogo from '../assets/images/argentBankLogo.png'
+import BankTreeLogo from '../assets/images/bank-tree.jpeg'
+import ChatIcon from '../assets/images/icon-chat.png'
+import MoneyIcon from '../assets/images/icon-money.png'
+import SecurityIcon from '../assets/images/icon-security.png'
 
-function App() {
+function Home() {
   return (
     <>
       <nav className="main-nav">
@@ -75,4 +75,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
