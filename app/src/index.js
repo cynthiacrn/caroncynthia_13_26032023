@@ -5,18 +5,21 @@ import './index.css';
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Home, SignIn, User } from './pages'
+import StoreProvider from "./store";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sign-in" element={<SignIn />} />
+    <StoreProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/sign-in" element={<SignIn />} />
 
-        {/* Protected Route */}
-        <Route path="/user" element={<ProtectedRoute component={User} />}/>
-      </Routes>
-    </Router>
+          {/* Protected Route */}
+          <Route path="/user" element={<ProtectedRoute component={User} />}/>
+        </Routes>
+      </Router>
+    </StoreProvider>
   )
 }
 
