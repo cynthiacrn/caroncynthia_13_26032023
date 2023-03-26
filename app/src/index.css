@@ -17,6 +17,12 @@ body {
   flex: 1;
 }
 
+button {
+  all: unset;
+  cursor: pointer;
+  outline: none;
+}
+
 .bg-dark {
   background-color: #12002b;
 }
@@ -42,7 +48,7 @@ body {
   padding: 5px 20px;
 }
 
-.main-nav a {
+.main-nav a, .main-nav button {
   font-weight: bold;
   color: #2c3e50;
 }
