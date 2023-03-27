@@ -4,9 +4,11 @@ import { client } from "../client";
 import { loginFailure, loginStart, loginSuccess } from "../store/reducers/auth";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import {useNavigate} from "react-router-dom";
 
 function SignIn() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('tony@stark.com')
   const [password, setPassword] = useState('password123')
   const [remember, setRemember] = useState(false)
@@ -18,6 +20,7 @@ function SignIn() {
     client.login({ email, password })
       .then(({ body: { token } }) => {
         dispatch(loginSuccess(token))
+        navigate("/user")
       })
       .catch(({ response: { data: { message } } }) => {
         dispatch(loginFailure(message))

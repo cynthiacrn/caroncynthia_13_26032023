@@ -9,7 +9,7 @@ export class ApiClient {
   _injectAuthorization(res) {
     const authorization = this._getAuthorization()
     if (authorization) {
-      res.headers.Authorization = authorization
+      res.headers.Authorization = `Bearer ${authorization}`
     }
     return res
   }

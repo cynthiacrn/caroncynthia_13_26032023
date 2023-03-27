@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 function ProtectedRoute({ component: Component, ...props }) {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated && !localStorage.getItem('token')) {
     return <Navigate to="/sign-in" replace />
   }
 

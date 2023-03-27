@@ -1,14 +1,26 @@
+import {useEffect, useState} from "react";
+import { client } from "../client";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
 function User() {
+  const [profile, setProfile] = useState(undefined)
+
+  useEffect(() => {
+    client.getProfile().then(({ body }) => setProfile(body))
+  }, [])
+
+  if (!profile) {
+    return
+  }
+
   return (
     <>
       <Navigation />
 
       <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back<br/>Tony Jarvis!</h1>
+          <h1>Welcome back<br/>{profile.firstName} {profile.lastName}!</h1>
           <button className="edit-button">Edit Name</button>
         </div>
 
