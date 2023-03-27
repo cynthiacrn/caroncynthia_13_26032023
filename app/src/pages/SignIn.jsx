@@ -1,15 +1,27 @@
+import { useState } from "react";
+import { useDispatch} from "react-redux";
+import { client } from "../client";
+import { loginFailure, loginStart, loginSuccess } from "../store/reducers/auth";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
-import {useState} from "react";
 
 function SignIn() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('tony@stark.com')
+  const [password, setPassword] = useState('password123')
   const [remember, setRemember] = useState(false)
 
   function onSubmit(event) {
     event.preventDefault()
-    console.log({ email, password, remember })
+    dispatch(loginStart())
+
+    client.login({ email, password })
+      .then(({ body: { token } }) => {
+        dispatch(loginSuccess(token))
+      })
+      .catch(({ response: { data: { message } } }) => {
+        dispatch(loginFailure(message))
+      });
   }
 
   return (
