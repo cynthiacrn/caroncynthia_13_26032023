@@ -20,17 +20,17 @@ export class ApiClient {
 
   async login({ email, password }) {
     const res = await this._httpClient.post('user/login', { email, password })
-    return res.data
+    return res.data.body.token
   }
 
   async getProfile() {
     const res = await this._httpClient.post('user/profile')
-    return res.data
+    return res.data.body
   }
 
   async updateProfile({ firstName, lastName }) {
     const res = await this._httpClient.put('user/profile', { firstName, lastName })
-    return res.data
+    return res.data.body
   }
 }
 

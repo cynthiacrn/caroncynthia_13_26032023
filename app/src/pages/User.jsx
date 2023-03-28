@@ -4,15 +4,52 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
 function User() {
-  const [profile, setProfile] = useState(undefined)
+  const [loading, setLoading] = useState(true)
+  const [profile, setProfile] = useState(null)
+  const [isEditing, setIsEditing] = useState(false)
+  const [newProfile, setNewProfile] = useState(null);
 
   useEffect(() => {
-    client.getProfile().then(({ body }) => setProfile(body))
+    setLoading(true)
+    client.getProfile()
+      .then((res) => {
+        setProfile(res)
+        setNewProfile({
+          firstName: res?.firstName || '',
+          lastName: res?.lastName || '',
+        });
+      })
+      .finally(() => setLoading(false))
   }, [])
 
-  if (!profile) {
-    return
-  }
+  const handleSave = () => {
+    if (newProfile.firstName === profile.firstName && newProfile.lastName === profile.lastName) {
+      return
+    }
+
+    setLoading(true)
+    client.updateProfile({ firstName: newProfile.firstName, lastName: newProfile.lastName })
+      .then((res) => {
+        console.log(res)
+        setProfile(res)
+        setNewProfile({
+          firstName: res?.firstName || '',
+          lastName: res?.lastName || '',
+        })
+      })
+      .finally(() => {
+        setLoading(false)
+        setIsEditing(false)
+      })
+  };
+
+  const handleCancel = () => {
+    setNewProfile({
+      firstName: profile?.firstName || '',
+      lastName: profile?.lastName || '',
+    });
+    setIsEditing(false);
+  };
 
   return (
     <>
@@ -20,8 +57,62 @@ function User() {
 
       <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back<br/>{profile.firstName} {profile.lastName}!</h1>
-          <button className="edit-button">Edit Name</button>
+          {!loading ? (
+            <>
+              {isEditing ? (
+                <>
+                  <h1>Welcome back<br/></h1>
+
+                  <div className="profile-form-container">
+                    <div className="input-wrapper">
+                      <label htmlFor="username"></label>
+                      <input
+                        id="username"
+                        type="text"
+                        value={newProfile.firstName}
+                        onChange={event =>
+                          setNewProfile({
+                            ...newProfile,
+                            firstName: event.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="input-wrapper">
+                      <label htmlFor="username"></label>
+                      <input
+                        id="username"
+                        type="text"
+                        value={newProfile.lastName}
+                        onChange={event =>
+                          setNewProfile({
+                            ...newProfile,
+                            lastName: event.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="profile-form-buttons">
+                    <button type="button" className="save-button" onClick={handleSave}>
+                      Save
+                    </button>
+                    <button type="button" className="cancel-button" onClick={handleCancel}>
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h1>Welcome back<br/>{profile.firstName} {profile.lastName}!</h1>
+                  <button onClick={() => setIsEditing(true)}>Edit</button>
+                </>
+              )}
+            </>
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
 
         <h2 className="sr-only">Accounts</h2>

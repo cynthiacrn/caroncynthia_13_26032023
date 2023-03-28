@@ -171,6 +171,37 @@ button {
   color: #fff;
 }
 
+.profile-form-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-form-container > *:not(:last-child) {
+  margin-right: 16px;
+}
+
+.profile-form-buttons > *:not(:last-child) {
+  margin-right: 16px;
+}
+
+.save-button {
+  background-color: white;
+  border: 1px solid #00bc77;
+  color: #00bc77;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.cancel-button {
+  background-color: white;
+  border: 1px solid #00bc77;
+  color: #00bc77;
+  font-weight: bold;
+  padding: 10px;
+}
+
 .sign-in-content {
   box-sizing: border-box;
   background-color: white;

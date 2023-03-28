@@ -18,7 +18,7 @@ function SignIn() {
     dispatch(loginStart())
 
     client.login({ email, password })
-      .then(({ body: { token } }) => {
+      .then((token) => {
         dispatch(loginSuccess(token))
         navigate("/user")
       })
