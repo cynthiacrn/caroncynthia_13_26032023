@@ -9,8 +9,8 @@ import {useNavigate} from "react-router-dom";
 function SignIn() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [email, setEmail] = useState('tony@stark.com')
-  const [password, setPassword] = useState('password123')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [remember, setRemember] = useState(false)
 
   function onSubmit(event) {
@@ -19,7 +19,7 @@ function SignIn() {
 
     client.login({ email, password })
       .then((token) => {
-        dispatch(loginSuccess(token))
+        dispatch(loginSuccess({ token, remember }))
         navigate("/user")
       })
       .catch(({ response: { data: { message } } }) => {

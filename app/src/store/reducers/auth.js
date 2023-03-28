@@ -15,21 +15,19 @@ const authSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    loginSuccess: (state, action) => {
-      const token = action.payload
+    loginSuccess: (state, { payload: { token, remember } }) => {
       localStorage.setItem('token', token)
 
       state.loading = false;
       state.token = token;
       state.isAuthenticated = true;
     },
-    loginFailure: (state, action) => {
+    loginFailure: (state, { payload: token }) => {
       state.loading = false;
-      state.token = action.payload;
+      state.token = token;
       state.isAuthenticated = false;
     },
-    restoreToken: (state, action) => {
-      const token = action.payload
+    restoreToken: (state, { payload: token }) => {
       state.token = token;
       state.isAuthenticated = true;
     },
