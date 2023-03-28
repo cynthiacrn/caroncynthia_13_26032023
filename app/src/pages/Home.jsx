@@ -1,9 +1,9 @@
+import Navigation from "../components/Navigation"
+import Footer from "../components/Footer"
 import BankTreeLogo from '../assets/images/bank-tree.jpeg'
 import ChatIcon from '../assets/images/icon-chat.png'
 import MoneyIcon from '../assets/images/icon-money.png'
 import SecurityIcon from '../assets/images/icon-security.png'
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
 
 function Home() {
   return (
@@ -59,7 +59,7 @@ function Home() {
 
       <Footer />
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

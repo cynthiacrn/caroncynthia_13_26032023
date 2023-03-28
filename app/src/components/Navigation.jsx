@@ -1,14 +1,16 @@
-import {useDispatch, useSelector} from "react-redux";
-import ArgentBankLogo from "../assets/images/argentBankLogo.png";
-import {Link} from "react-router-dom";
-import {logout} from "../store/reducers/auth";
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "../store/reducers/auth"
+import ArgentBankLogo from "../assets/images/argentBankLogo.png"
 
 function Navigation() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 
   function onLogout() {
     dispatch(logout())
+    navigate('/')
   }
 
   return (
@@ -26,7 +28,7 @@ function Navigation() {
           isAuthenticated
             ? (
               <>
-                <Link className="main-nav-item" to="/user">
+                <Link className="main-nav-item" to="/profile">
                   <i className="fa fa-user-circle"></i>
                   Tony
                 </Link>
@@ -37,7 +39,7 @@ function Navigation() {
               </>
             )
             : (
-              <Link to="/sign-in" className="main-nav-item">
+              <Link to="/login" className="main-nav-item">
                 <i className="fa fa-user-circle"></i>
                 Sign In
               </Link>
@@ -46,6 +48,6 @@ function Navigation() {
       </div>
     </nav>
   )
-};
+}
 
-export default Navigation;
+export default Navigation

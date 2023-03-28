@@ -1,13 +1,13 @@
-import {useEffect, useState} from "react";
-import { client } from "../client";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
+import { useEffect, useState } from "react"
+import { client } from "../client"
+import Navigation from "../components/Navigation"
+import Footer from "../components/Footer"
 
-function User() {
+function Profile() {
   const [loading, setLoading] = useState(true)
   const [profile, setProfile] = useState(null)
   const [isEditing, setIsEditing] = useState(false)
-  const [newProfile, setNewProfile] = useState(null);
+  const [newProfile, setNewProfile] = useState(null)
 
   useEffect(() => {
     setLoading(true)
@@ -17,12 +17,13 @@ function User() {
         setNewProfile({
           firstName: res?.firstName || '',
           lastName: res?.lastName || '',
-        });
+        })
       })
       .finally(() => setLoading(false))
   }, [])
 
-  const handleSave = () => {
+  const handleSave = (event) => {
+    event.preventDefault()
     if (newProfile.firstName === profile.firstName && newProfile.lastName === profile.lastName) {
       return
     }
@@ -41,15 +42,16 @@ function User() {
         setLoading(false)
         setIsEditing(false)
       })
-  };
+  }
 
-  const handleCancel = () => {
+  const handleCancel = (event) => {
+    event.preventDefault()
     setNewProfile({
       firstName: profile?.firstName || '',
       lastName: profile?.lastName || '',
-    });
-    setIsEditing(false);
-  };
+    })
+    setIsEditing(false)
+  }
 
   return (
     <>
@@ -156,4 +158,4 @@ function User() {
   )
 }
 
-export default User;
+export default Profile

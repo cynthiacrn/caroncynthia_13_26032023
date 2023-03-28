@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useDispatch} from "react-redux";
-import { client } from "../client";
-import { loginFailure, loginStart, loginSuccess } from "../store/reducers/auth";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
-import {useNavigate} from "react-router-dom";
+import { useState } from "react"
+import { useDispatch} from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { client } from "../client"
+import { loginFailure, loginStart, loginSuccess } from "../store/reducers/auth"
+import Navigation from "../components/Navigation"
+import Footer from "../components/Footer"
 
-function SignIn() {
+function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
@@ -20,11 +20,11 @@ function SignIn() {
     client.login({ email, password })
       .then((token) => {
         dispatch(loginSuccess({ token, remember }))
-        navigate("/user")
+        navigate("/profile")
       })
       .catch(({ response: { data: { message } } }) => {
         dispatch(loginFailure(message))
-      });
+      })
   }
 
   return (
@@ -82,4 +82,4 @@ function SignIn() {
   )
 }
 
-export default SignIn;
+export default Login

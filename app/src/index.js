@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute";
-import StoreProvider from "./store";
+import React, { useEffect } from 'react'
+import { useDispatch } from "react-redux"
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import StoreProvider from "./store"
+import { restoreToken } from "./store/reducers/auth"
 import Home from './pages/Home'
-import SignIn from './pages/SignIn'
-import User from './pages/User'
-import './index.css';
-import {useDispatch} from "react-redux";
-import {restoreToken} from "./store/reducers/auth";
+import Login from './pages/Login'
+import Profile from './pages/Profile'
+import ProtectedRoute from "./components/ProtectedRoute"
+import './index.css'
 
 function App() {
   const dispatch = useDispatch()
@@ -25,10 +25,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/login" element={<Login />} />
 
         {/* Protected Route */}
-        <Route path="/user" element={<ProtectedRoute component={User} />}/>
+        <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
       </Routes>
     </Router>
   )
@@ -39,4 +39,4 @@ createRoot(document.getElementById('root'))
     <StoreProvider>
       <App />
     </StoreProvider>
-  );
+  )
