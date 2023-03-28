@@ -1,0 +1,169 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Transactions API
+  description: API to manage transactions
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Enter your bearer token in the format 'Bearer &lt;token&gt;'
+paths:
+  /transactions:
+    get:
+      security:
+        - Bearer: []
+      summary: Retrieve transactions for the current month
+      description: Returns a list of all transactions for the current month
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+    post:
+      summary: Add a new transaction
+      description: Adds a new transaction with the provided data
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: transaction
+          description: Transaction object
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionInput'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Bad Request
+  /transactions/{transactionId}:
+    get:
+      summary: Retrieve a transaction by ID
+      description: Returns the details of a transaction with the provided ID
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: path
+          name: transactionId
+          description: ID of the transaction to retrieve
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Transaction'
+        '404':
+          description: Not Found
+    put:
+      summary: Update a transaction
+      description: Updates an existing transaction with the provided data
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: path
+          name: transactionId
+          description: ID of the transaction to update
+          required: true
+          type: integer
+        - in: body
+          name: transaction
+          description: Transaction object
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+    delete:
+      summary: Delete a transaction
+      description: Deletes an existing transaction with the provided ID
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: path
+          name: transactionId
+          description: ID of the transaction to delete
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+definitions:
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: integer
+      date:
+        type: string
+        format: date-time
+      description:
+        type: string
+      amount:
+        type: number
+        format: float
+      balance:
+        type: number
+        format: float
+    required:
+      - id
+      - date
+      - description
+      - amount
+      - balance
+  TransactionInput:
+    type: object
+    properties:
+      date:
+        type: string
+        format: date-time
+      description:
+        type: string
+      amount:
+        type: number
+        format: float
+    required:
+      - date
+      - description
+      - amount
