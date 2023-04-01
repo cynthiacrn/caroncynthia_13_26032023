@@ -7,6 +7,7 @@ function Navigation() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+  const firstName = useSelector((state) => state.profile.firstName)
 
   function onLogout() {
     dispatch(logout())
@@ -30,7 +31,7 @@ function Navigation() {
               <>
                 <Link className="main-nav-item" to="/profile">
                   <i className="fa fa-user-circle"></i>
-                  Tony
+                  {firstName}
                 </Link>
                 <button onClick={onLogout} className="main-nav-item">
                   <i className="fa fa-sign-out"></i>

@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setProfileFailure, setProfileStart, setProfileSuccess } from "../store/reducers/profile";
 import { client } from "../client"
 import Navigation from "../components/Navigation"
 import Footer from "../components/Footer"
 
 function Profile() {
-  const [loading, setLoading] = useState(true)
-  const [profile, setProfile] = useState(null)
+  const dispatch = useDispatch()
+  const loading = useSelector((state) => state.profile.loading)
+  const profile = useSelector((state) => ({ firstName: state.profile.firstName, lastName: state.profile.lastName }))
   const [isEditing, setIsEditing] = useState(false)
   const [newProfile, setNewProfile] = useState(null)
 
   useEffect(() => {
-    setLoading(true)
+    dispatch(setProfileStart())
     client.getProfile()
       .then((res) => {
-        setProfile(res)
-        setNewProfile({
-          firstName: res?.firstName || '',
-          lastName: res?.lastName || '',
-        })
+        dispatch(setProfileSuccess({ firstName: res.firstName, lastName: res.lastName }))
+        setNewProfile({ firstName: res.firstName, lastName: res.lastName })
       })
-      .finally(() => setLoading(false))
+      .catch(({ response: { data: { message } } }) => {
+        dispatch(setProfileFailure(message))
+      })
   }, [])
 
   const handleSave = (event) => {
@@ -28,28 +30,23 @@ function Profile() {
       return
     }
 
-    setLoading(true)
+    dispatch(setProfileStart())
     client.updateProfile({ firstName: newProfile.firstName, lastName: newProfile.lastName })
       .then((res) => {
-        console.log(res)
-        setProfile(res)
-        setNewProfile({
-          firstName: res?.firstName || '',
-          lastName: res?.lastName || '',
-        })
+        dispatch(setProfileSuccess({ firstName: res.firstName, lastName: res.lastName }))
+        setNewProfile({ firstName: res.firstName, lastName: res.lastName })
+      })
+      .catch(({ response: { data: { message } } }) => {
+        dispatch(setProfileFailure(message))
       })
       .finally(() => {
-        setLoading(false)
         setIsEditing(false)
       })
   }
 
   const handleCancel = (event) => {
     event.preventDefault()
-    setNewProfile({
-      firstName: profile?.firstName || '',
-      lastName: profile?.lastName || '',
-    })
+    setNewProfile({ firstName: profile.firstName, lastName: profile.lastName })
     setIsEditing(false)
   }
 

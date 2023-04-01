@@ -22,9 +22,9 @@ const authSlice = createSlice({
       state.token = token;
       state.isAuthenticated = true;
     },
-    loginFailure: (state, { payload: token }) => {
+    loginFailure: (state, { payload: error }) => {
       state.loading = false;
-      state.token = token;
+      state.error = error;
       state.isAuthenticated = false;
     },
     restoreToken: (state, { payload: token }) => {
@@ -32,7 +32,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     logout: (state) => {
-      state.token = false;
+      state.token = null;
       state.isAuthenticated = false;
 
       localStorage.removeItem('token')

@@ -1,9 +1,11 @@
 import { combineReducers, createStore } from "redux";
 import { Provider } from "react-redux";
 import auth from './reducers/auth'
+import profile from './reducers/profile'
 
 const rootReducer = combineReducers({
   auth,
+  profile,
 })
 
 const store = createStore(rootReducer);
