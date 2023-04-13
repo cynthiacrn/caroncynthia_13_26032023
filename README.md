@@ -1,6 +1,6 @@
-# Project #10 - Argent Bank API
+# Argent Bank: PROJECT 13 Frontend Developer, OPENCLASSROOMS course
 
-This codebase contains the code needed to run the backend for Argent Bank.
+This codebase contains the code needed to run the project.
 
 ## Getting Started
 
@@ -10,6 +10,7 @@ Argent Bank uses the following tech stack:
 
 - [Node.js v12](https://nodejs.org/en/)
 - [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+- [React](https://fr.reactjs.org/)
 
 Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
 
@@ -29,6 +30,8 @@ mongo --version
 1. Run the following commands:
 
 ```bash
+In a first command terminal:
+
 # Set up server 
 cd api/
 
@@ -47,6 +50,8 @@ npm run populate-db
 Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
 
 ```bash
+In a second command terminal:
+
 # Set up server 
 cd app/
 
