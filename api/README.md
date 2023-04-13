@@ -29,14 +29,30 @@ mongo --version
 1. Run the following commands:
 
 ```bash
+# Set up server
+cd api/
+
 # Install dependencies
 npm install
+
+# Start mongodb
+service mongodb start
 
 # Start local dev server
 npm run dev:server
 
 # Populate database with two users
 npm run populate-db
+
+# Set up app
+cd app/
+
+# Install dependencies
+npm install
+
+# Start app
+npm start
+
 ```
 
 Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
