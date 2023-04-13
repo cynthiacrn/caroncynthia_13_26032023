@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const profileSlice = createSlice({
-  name: 'auth',
+  name: 'profile',
   initialState,
   reducers: {
     setProfileStart: (state) => {

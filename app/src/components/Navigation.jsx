@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../store/reducers/auth"
+import { clearProfile } from "../store/reducers/profile"
 import ArgentBankLogo from "../assets/images/argentBankLogo.png"
 
 function Navigation() {
@@ -11,6 +12,7 @@ function Navigation() {
 
   function onLogout() {
     dispatch(logout())
+    dispatch(clearProfile())
     navigate('/')
   }
 

@@ -15,7 +15,7 @@ const authSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    loginSuccess: (state, { payload: { token, remember } }) => {
+    loginSuccess: (state, { payload: token  }) => {
       localStorage.setItem('token', token)
 
       state.loading = false;

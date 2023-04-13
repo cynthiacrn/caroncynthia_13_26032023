@@ -326,3 +326,14 @@ button {
     width: 200px;
   }
 }
+
+@media (max-width: 720px) {
+  .profile-form-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-wrapper {
+    margin-right: 0 !important;
+  }
+}

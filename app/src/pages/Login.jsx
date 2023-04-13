@@ -19,7 +19,7 @@ function Login() {
 
     client.login({ email, password })
       .then((token) => {
-        dispatch(loginSuccess({ token, remember }))
+        dispatch(loginSuccess(token))
         navigate("/profile")
       })
       .catch(({ response: { data: { message } } }) => {
