@@ -1,0 +1,209 @@
+openapi: 3.0.1
+info:
+  description: API to manage transactions
+  title: Transactions API
+  version: 1.0.0
+servers:
+- url: http://localhost:3001/api/v1
+paths:
+  /transactions:
+    get:
+      description: Returns a list of all transactions for the current month
+      parameters:
+      - description: Attach Bearer JWT token
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Transaction'
+                type: array
+          description: OK
+      security:
+      - Bearer: []
+      summary: Retrieve transactions for the current month
+      x-accepts: application/json
+    post:
+      description: Adds a new transaction with the provided data
+      parameters:
+      - description: Attach Bearer JWT token
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionInput'
+        description: Transaction object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Created
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Add a new transaction
+      x-codegen-request-body-name: transaction
+      x-contentType: application/json
+      x-accepts: application/json
+  /transactions/{transactionId}:
+    delete:
+      description: Deletes an existing transaction with the provided ID
+      parameters:
+      - description: Attach Bearer JWT token
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: ID of the transaction to delete
+        in: path
+        name: transactionId
+        required: true
+        schema:
+          type: integer
+      responses:
+        "204":
+          content: {}
+          description: No Content
+        "404":
+          content: {}
+          description: Not Found
+      summary: Delete a transaction
+      x-accepts: application/json
+    get:
+      description: Returns the details of a transaction with the provided ID
+      parameters:
+      - description: Attach Bearer JWT token
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: ID of the transaction to retrieve
+        in: path
+        name: transactionId
+        required: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: OK
+        "404":
+          content: {}
+          description: Not Found
+      summary: Retrieve a transaction by ID
+      x-accepts: application/json
+    put:
+      description: Updates an existing transaction with the provided data
+      parameters:
+      - description: Attach Bearer JWT token
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: ID of the transaction to update
+        in: path
+        name: transactionId
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionInput'
+        description: Transaction object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: OK
+        "400":
+          content: {}
+          description: Bad Request
+        "404":
+          content: {}
+          description: Not Found
+      summary: Update a transaction
+      x-codegen-request-body-name: transaction
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    Transaction:
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        amount: 6.0274563
+        balance: 1.4658129
+        description: description
+        id: 0
+      properties:
+        id:
+          type: integer
+        date:
+          format: date-time
+          type: string
+        description:
+          type: string
+        amount:
+          format: float
+          type: number
+        balance:
+          format: float
+          type: number
+      required:
+      - amount
+      - balance
+      - date
+      - description
+      - id
+      type: object
+    TransactionInput:
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        amount: 0.8008282
+        description: description
+      properties:
+        date:
+          format: date-time
+          type: string
+        description:
+          type: string
+        amount:
+          format: float
+          type: number
+      required:
+      - amount
+      - date
+      - description
+      type: object
+  securitySchemes:
+    Bearer:
+      description: Enter your bearer token in the format 'Bearer &lt;token&gt;'
+      in: header
+      name: Authorization
+      type: apiKey
+x-original-swagger-version: "2.0"
+
